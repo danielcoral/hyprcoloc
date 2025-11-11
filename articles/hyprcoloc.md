@@ -993,7 +993,7 @@ ptm <- proc.time()
 res <- hyprcoloc(betas, ses, trait.names = traits, snp.id = rsid, bb.selection = "reg.only", reg.thresh = 0.9)
 proc.time() - ptm
 #>    user  system elapsed 
-#>   0.012   0.000   0.012
+#>   0.013   0.000   0.012
 res
 #> 
 #> Call: 
@@ -1070,7 +1070,7 @@ ptm <- proc.time()
 res <- hyprcoloc(betas100, ses100, trait.names = traits100, snp.id = rsid)
 proc.time() - ptm
 #>    user  system elapsed 
-#>   0.394   0.002   0.397
+#>   0.385   0.001   0.387
 # print the number of traits in each cluster
 clusters <- which(!is.na(res$results$traits))
 for (c in clusters) {
@@ -1129,7 +1129,7 @@ ptm <- proc.time()
 res <- hyprcoloc(betas1000, ses1000, trait.names = traits1000, snp.id = rsid)
 proc.time() - ptm
 #>    user  system elapsed 
-#>  25.667   0.433  26.104
+#>  25.458   0.314  25.776
 # print the number of traits in each cluster
 # print the number of traits in each cluster
 clusters <- which(!is.na(res$results$traits))
@@ -1327,7 +1327,7 @@ time.ind
 #>   0.011   0.000   0.012
 time.corr
 #>    user  system elapsed 
-#>  21.869   0.292  22.164
+#>  21.746   0.288  22.037
 ```
 
 Thus, assuming independence between the studies not only correctly
