@@ -1,16 +1,12 @@
 //Includes/namespaces
-#include <Rcpp.h>
 #include <RcppEigen.h>
-#include <iostream>
-#include <Eigen/Core>
 // [[Rcpp::depends(RcppEigen)]]
 
 using namespace Rcpp;
-using namespace RcppEigen;
 using Eigen::Map;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
-using Rcpp::as;
+
 // [[Rcpp::export]]
 
 List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1, NumericVector traitsCo, NumericVector traitNo, NumericMatrix rho, NumericMatrix trait_cor, NumericVector EPS){
@@ -177,7 +173,7 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1, 
   VectorXd Wco(Map<VectorXd>(W1.data(), n_cv*ncolZco));
 
   for (int m = 0; m < ncolZco; m++){
-   tmp_rho(i) = RHO(snps1(1 , i)-1, snps1(0 , i)-1);
+   tmp_rho(i) = RHO(int(snps1(1 , i))-1, int(snps1(0 , i))-1);
    tmp_rho_11(2*m+1) = tmp_rho(i);
    tmp_rho_12(2*m) = tmp_rho(i);
    tmp_rho_21(2*m+1) = tmp_rho(i);
@@ -210,8 +206,8 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1, 
     Wdiag_1 = W_1cv.row(iter_1).asDiagonal();
 
     for (int m = 0; m < ncolZco; m++){
-     snp_cor_1cv(2*m) = RHO(snps1(0,i)-1, j2)*tet_1cv(2*m);
-     snp_cor_1cv(2*m+1) = RHO(snps1(1,i)-1, j2)*tet_1cv(2*m+1);
+     snp_cor_1cv(2*m) = RHO(int(snps1(0,i))-1, j2)*tet_1cv(2*m);
+     snp_cor_1cv(2*m+1) = RHO(int(snps1(1,i))-1, j2)*tet_1cv(2*m+1);
     }
 
     snp_cor_1cv(sigZdim - n_cv) = sigZ1_new(sigZdim - n_cv,sigZdim - n_cv);
@@ -262,10 +258,10 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1, 
     Wdiag_2 = W_2cv.row(iter_2).asDiagonal();
 
     for (int m = 0; m < ncolZco; m++){
-     snp_cor_2cv(2*m) = RHO(snps1(0,i)-1, snps1(0,j2)-1)*tet_2cv(2*m);
-     snp_cor_2cv(2*m+1) = RHO(snps1(1,i)-1, snps1(0,j2)-1)*tet_2cv(2*m+1);
-     snp_cor_2cv_1(2*m) = RHO(snps1(0,i)-1, snps1(1,j2)-1)*tet_2cv(2*m);
-     snp_cor_2cv_1(2*m+1) = RHO(snps1(1,i)-1, snps1(1,j2)-1)*tet_2cv(2*m+1);
+     snp_cor_2cv(2*m) = RHO(int(snps1(0,i))-1, int(snps1(0,j2))-1)*tet_2cv(2*m);
+     snp_cor_2cv(2*m+1) = RHO(int(snps1(1,i))-1, int(snps1(0,j2))-1)*tet_2cv(2*m+1);
+     snp_cor_2cv_1(2*m) = RHO(int(snps1(0,i))-1, int(snps1(1,j2))-1)*tet_2cv(2*m);
+     snp_cor_2cv_1(2*m+1) = RHO(int(snps1(1,i))-1, int(snps1(1,j2))-1)*tet_2cv(2*m+1);
     }
 
     snp_cor_2cv(sigZdim - n_cv) = sigZ2_new(sigZdim - n_cv, sigZdim - n_cv);
@@ -274,8 +270,8 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1, 
     sigZ2.col(sigZdim - n_cv) = snp_cor_2cv;
     sigZ2.row(sigZdim - 1) = snp_cor_2cv_1;
     sigZ2.col(sigZdim - 1) = snp_cor_2cv_1;
-    sigZ2(2*ncolZco+1, 2*ncolZco) = RHO(snps1(1 , j2)-1, snps1(0 , j2)-1);
-    sigZ2(2*ncolZco, 2*ncolZco+1) = RHO(snps1(1 , j2)-1, snps1(0 , j2)-1);
+    sigZ2(2*ncolZco+1, 2*ncolZco) = RHO(int(snps1(1 , j2))-1, int(snps1(0 , j2))-1);
+    sigZ2(2*ncolZco, 2*ncolZco+1) = RHO(int(snps1(1 , j2))-1, int(snps1(0 , j2))-1);
 
     adjZ_2 = Wdiag_2*sigZ2*Wdiag_2;
 

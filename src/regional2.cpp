@@ -1,18 +1,13 @@
 //Includes/namespaces
-#include <Rcpp.h>
 #include <RcppEigen.h>
-#include <Eigen/Dense>
-#include <iostream>
-#include <Eigen/Core>
 // [[Rcpp::depends(RcppEigen)]]
 
 using namespace Rcpp;
-using namespace RcppEigen;
 using Eigen::Map;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using Eigen::ArrayXd;
-using Rcpp::as;
+
 // [[Rcpp::export]]
 
 List regional2(NumericMatrix zTemp1, NumericMatrix wTemp1, NumericMatrix sTemp1, NumericVector traitsCo, NumericMatrix rho, NumericMatrix trait_cor, NumericVector EPS){
@@ -128,7 +123,7 @@ List regional2(NumericMatrix zTemp1, NumericMatrix wTemp1, NumericMatrix sTemp1,
 
   // compute the subseted correlation matrix for co and no-co Z-scores
   for (int k = 0; k < m; k++){
-   tmp_rho(i) = RHO(snps(0 , i)-1, snps(1 , i)-1);
+   tmp_rho(i) = RHO(int(snps(0 , i))-1, int(snps(1 , i))-1);
    tmp_rho_21(2*k+1) = tmp_rho(i);
    tmp_rho_22(2*k) = tmp_rho(i);
   }
@@ -169,7 +164,7 @@ for (int i = Q; i < ncol; i++){
 
   // compute the subseted correlation matrix for coloc Z-scores
   for (int k = 0; k < m; k++){
-   tmp_rho(i) = RHO(snps(0 , i)-1, snps(1 , i)-1);
+   tmp_rho(i) = RHO(int(snps(0 , i))-1, int(snps(1 , i))-1);
    tmp_rho_21(2*k+1) = tmp_rho(i);
    tmp_rho_22(2*k) = tmp_rho(i);
   }

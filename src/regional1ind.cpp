@@ -1,19 +1,14 @@
 //Includes/namespaces
-#include <Rcpp.h>
 #include <RcppEigen.h>
-#include <Eigen/Dense>
-#include <iostream>
-#include <Eigen/Core>
 // [[Rcpp::depends(RcppEigen)]]
 
 using namespace Rcpp;
-using namespace RcppEigen;
 using Eigen::Map;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using Eigen::ArrayXd;
-using Rcpp::as;
 using Eigen::LLT;
+
 // [[Rcpp::export]]
 
 List regional1ind(NumericMatrix zTemp1, NumericMatrix wTemp1, NumericVector traitsCo){

@@ -1,16 +1,12 @@
 //Includes/namespaces
-#include <Rcpp.h>
 #include <RcppEigen.h>
-#include <iostream>
-#include <Eigen/Core>
 // [[Rcpp::depends(RcppEigen)]]
 
 using namespace Rcpp;
-using namespace RcppEigen;
 using Eigen::Map;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
-using Rcpp::as;
+
 // [[Rcpp::export]]
 
 List align1(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericVector N_CV, NumericVector traitsCo, NumericVector traitNo, NumericMatrix trait_cor, NumericMatrix rho, NumericVector EPS){
