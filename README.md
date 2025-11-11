@@ -13,7 +13,6 @@ HyPrColoc is an efficient deterministic Bayesian divisive clustering algorithm u
 ## Installation
 ```
 install.packages("remotes")
-remotes::install_version("RcppEigen", version = "0.3.3.9.3")
 remotes::install_github("jrs95/hyprcoloc", build_vignettes = TRUE)
 ```
 
